@@ -1,7 +1,6 @@
 from src import about,mail,home
 import streamlit as st
 
-
 def init():
     st.session_state.page = 'Homepage'
     st.session_state.project = False

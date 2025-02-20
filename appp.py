@@ -1,47 +1,114 @@
-import tensorflow as tf
-import numpy as np
+from src import about,mail,home
 import streamlit as st
-from PIL import Image
-import requests
-from io import BytesIO
-
-import warnings
-warnings.simplefilter(action='ignore', category=FutureWarning)
-
-st.set_option('deprecation.showfileUploaderEncoding', False)
-st.title("Pnuemonia Detection Image Classifier")
-st.text("Provide URL of Chest Xray for Pneumonia Detection")
 
 
-@st.cache(allow_output_mutation=True)
-def load_model():
-    model = tf.keras.models.load_model('models/model.h5')
-    return model
+def init():
+    st.session_state.page = 'Homepage'
+    st.session_state.project = False
+    st.session_state.model = False
+
+    st.session_state.pages = {
+        'Pneumonia Detection':info.main,
+        'About the Dataset': info.main
+    }
+
+def draw_style():
+
+    style = """
+        <style>
+        .stApp {background-image: url("");
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+
+}
+            header {visibility: visible;}
+            footer {visibility: hidden;} 
+            
+            
+        </style>
+    """
+
+    st.set_page_config(page_title='Pneumonia Detection')
+    
+    st.markdown(style, unsafe_allow_html=True)
+
+def load_page():
+    st.session_state.pages[st.session_state.page]()
+
+def set_page(loc=None, reset=False):
+    if not st.session_state.page == 'Homepage':
+        for key in list(st.session_state.keys()):
+            if key not in ('page', 'project', 'model', 'pages', 'set'):
+                st.session_state.pop(key)
+
+    if loc:
+        st.session_state.page = loc
+    else:
+        st.session_state.page = st.session_state.set
+
+    if reset:
+        st.session_state.project = False
+    elif st.session_state.page in ('Message me', 'About me'):
+        st.session_state.project = True
+        st.session_state.model = False
+    else:
+        pass
+
+def change_button():
+    set_page('Pneumonia Detection')
+    st.session_state.model = True
+    st.session_state.project = True
+
+def prev():
+    st.header("Disease Detection Deep Learning Model")
+
+    models = ["Pneumonia Detection"]
+    models_info = ["Info about Pneumonia Detection"]
+    press = [False]*len(models)
+    with st.sidebar:
+        st.title("Browse Models")
+        for i,model in enumerate(models):
+            press[i] = st.sidebar.button(model)
+            with st.expander("See Info"):
+                st.write(models_info[i])
 
 
-with st.spinner('Loading Model Into Memory....'):
-  model = load_model()
+def main():
+    if 'page' not in st.session_state:
+        init()
 
-classes = ['Bacterial Pneumonia', 'Normal', 'Viral Pneumonia']
+    draw_style()
+
+    with st.sidebar:
+        project, about ,contact= st.columns([0.8, 1, 1.2])
+
+        if not st.session_state.project:
+            project.button('Models', on_click=change_button)
+        else:
+            project.button('Home', on_click=set_page, args=('Homepage', True))
+
+        if st.session_state.project and st.session_state.model:
+            st.radio(
+                'Models',
+                ['Pneumonia Detection'],
+                key='set',
+                on_change=set_page,
+            )
+
+        about.button('About Us', on_click=set_page, args=('About Us',))
+
+        contact.button(
+            'Contact Us', on_click=set_page, args=('Message Us',)
+        )
+        st.button("About the Dataset",on_click=set_page,args=("About the Dataset",))
+
+        if st.session_state.page == 'Homepage':
+            st.image('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn1IJHCjcIVgsqDujSCNq8s2Db-2zOARSm_g&s')
+            
+
+    load_page()
 
 
-def decode_img(image):
-    img = tf.image.decode_jpeg(image, channels=3)
-    img = tf.image.resize(img, [224, 224])
-    return np.expand_dims(img, axis=0)
-
-
-path = st.text_input('Enter Image URL to Classify.. ',
-                     'https://raw.githubusercontent.com/mvram123/Pneumonia-Detection/main/samples/v1.jpeg')
-if path is not None:
-    content = requests.get(path).content
-
-    st.write("Predicted Class :")
-    with st.spinner('classifying.....'):
-        label = np.argmax(model.predict(decode_img(content)), axis=1)
-    print(model.predict(decode_img(content)))
-    print(label)
-    st.write(classes[label[0]])
-    st.write("")
-    image = Image.open(BytesIO(content))
-    st.image(image, caption='Pneumonia Detection', use_column_width=True)
+if __name__ == '__main__':
+    main()

@@ -1,4 +1,4 @@
-from src import prediction_page,about,mail,home,pneumonia,blood_cancer,covid19,info
+from src import about,mail,home
 import streamlit as st
 
 
@@ -8,11 +8,7 @@ def init():
     st.session_state.model = False
 
     st.session_state.pages = {
-        'Tumour Detection' : prediction_page.main,
-        'Homepage': home.main,
-        'About Us': about.main,
-        'Message Us': mail.main,
-        'Pneumonia Detection':pneumonia.main,
+        'Pneumonia Detection':info.main,
         'About the Dataset': info.main
     }
 
@@ -33,7 +29,7 @@ background-position: center;
         </style>
     """
 
-    st.set_page_config(page_title='Tumor Detection', page_icon='🧠')
+    st.set_page_config(page_title='Pneumonia Detection')
     
     st.markdown(style, unsafe_allow_html=True)
 
@@ -60,15 +56,15 @@ def set_page(loc=None, reset=False):
         pass
 
 def change_button():
-    set_page('Tumour Detection')
+    set_page('Pneumonia Detection')
     st.session_state.model = True
     st.session_state.project = True
 
 def prev():
-    st.header("Disease Detection Deep Learning Models")
+    st.header("Disease Detection Deep Learning Model")
 
-    models = ["Tumor Detection","Heart Detection","Any other Detection"]
-    models_info = ["Info about tumor Detection","Info about heart detection","Info about other detection"]
+    models = ["Pneumonia Detection"]
+    models_info = ["Info about Pneumonia Detection"]
     press = [False]*len(models)
     with st.sidebar:
         st.title("Browse Models")
@@ -99,7 +95,7 @@ def main():
         if st.session_state.project and st.session_state.model:
             st.radio(
                 'Models',
-                ['Tumour Detection'],
+                ['Pneumonia Detection'],
                 key='set',
                 on_change=set_page,
             )
@@ -112,7 +108,7 @@ def main():
         st.button("About the Dataset",on_click=set_page,args=("About the Dataset",))
 
         if st.session_state.page == 'Homepage':
-            st.image('https://media.giphy.com/media/lkdIhnHHnFma6xvICt/giphy-downsized-large.gif')
+            st.image('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn1IJHCjcIVgsqDujSCNq8s2Db-2zOARSm_g&s')
             
 
     load_page()

@@ -1,6 +1,17 @@
 from src import about, mail, home, info
 import streamlit as st
 import os
+import tensorflow as tf
+import numpy as np
+from PIL import Image
+
+# Load the trained pneumonia detection model
+@st.cache_resource()
+def load_model():
+    return tf.keras.models.load_model("pneumonia_model.h5")
+
+model = load_model()
+
 
 def init():
     st.session_state.page = 'Homepage'

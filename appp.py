@@ -1,4 +1,4 @@
-from src import about, mail, home, info  # Ensure 'info' is imported
+from src import about, mail, home, info
 import streamlit as st
 
 def init():
@@ -7,8 +7,8 @@ def init():
     st.session_state.model = False
 
     st.session_state.pages = {
-        'Pneumonia Detection': home.main,  # Use correct function instead of info.main
-        'About the Dataset': about.main  # Make sure this function exists
+        'Pneumonia Detection': home.main,
+        'About the Dataset': about.main
     }
 
 def draw_style():
@@ -65,7 +65,7 @@ def prev():
                 st.write(models_info[i])
 
 def main():
-    st.set_page_config(page_title='Pneumonia Detection')  # Must be at the start
+    st.set_page_config(page_title='Pneumonia Detection')
 
     if 'page' not in st.session_state:
         init()

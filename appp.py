@@ -96,18 +96,6 @@ def main():
         init()
 
     draw_style()
- st.title("Pneumonia Detection System")
-    uploaded_file = st.file_uploader("Upload a Chest X-ray", type=["jpg", "png", "jpeg"])
-
-    if uploaded_file is not None:
-        image = Image.open(uploaded_file)
-        st.image(image, caption="Uploaded X-ray", use_column_width=True)
-
-        processed_image = preprocess_image(image)
-        prediction = model.predict(processed_image)
-
-        result = "Pneumonia Detected" if prediction[0][0] > 0.5 else "No Pneumonia"
-        st.write(f"Prediction: **{result}**")
     with st.sidebar:
         project, about, contact = st.columns([0.8, 1, 1.2])
 
@@ -138,4 +126,21 @@ def main():
     load_page()
 
 if __name__ == '__main__':
+    main()
+def main():
+    st.title("Pneumonia Detection System")
+    
+    uploaded_file = st.file_uploader("Upload a Chest X-ray", type=["jpg", "png", "jpeg"])
+    
+    if uploaded_file is not None:
+        image = Image.open(uploaded_file)
+        st.image(image, caption="Uploaded X-ray", use_column_width=True)
+        
+        processed_image = preprocess_image(image)
+        prediction = model.predict(processed_image)
+
+        result = "Pneumonia Detected" if prediction[0][0] > 0.5 else "No Pneumonia"
+        st.write(f"Prediction: **{result}**")
+
+if __name__ == "__main__":
     main()

@@ -93,7 +93,7 @@ def main():
         st.button("About the Dataset", on_click=set_page, args=("About the Dataset",))
 
         if st.session_state.page == 'Homepage':
-            st.image("images/pneumonia.jpg")  # Make sure this image exists
+            st.image("test_files/pneumonia.jpg")  # Make sure this image exists
 
     load_page()
 

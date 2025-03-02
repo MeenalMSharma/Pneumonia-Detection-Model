@@ -1,17 +1,6 @@
 from src import about, mail, home, info
 import streamlit as st
 import os
-import tensorflow as tf
-import numpy as np
-from PIL import Image
-
-# Load the trained pneumonia detection model
-@st.cache_resource()
-def load_model():
-    return tf.keras.models.load_model("pneumonia_model.h5")
-
-model = load_model()
-
 
 def init():
     st.session_state.page = 'Homepage'
@@ -68,13 +57,6 @@ def change_button():
     set_page('Pneumonia Detection')
     st.session_state.model = True
     st.session_state.project = True
-    
-def preprocess_image(image):
-    image = image.convert('L')  # Convert to grayscale if needed
-    image = image.resize((224, 224))  # Resize to match model input
-    image = np.array(image) / 255.0  # Normalize pixel values
-    image = np.expand_dims(image, axis=0)  # Add batch dimension
-    return image
 
 def prev():
     st.header("Disease Detection Deep Learning Model")
@@ -126,21 +108,4 @@ def main():
     load_page()
 
 if __name__ == '__main__':
-    main()
-def main():
-    st.title("Pneumonia Detection System")
-    
-    uploaded_file = st.file_uploader("Upload a Chest X-ray", type=["jpg", "png", "jpeg"])
-    
-    if uploaded_file is not None:
-        image = Image.open(uploaded_file)
-        st.image(image, caption="Uploaded X-ray", use_column_width=True)
-        
-        processed_image = preprocess_image(image)
-        prediction = model.predict(processed_image)
-
-        result = "Pneumonia Detected" if prediction[0][0] > 0.5 else "No Pneumonia"
-        st.write(f"Prediction: **{result}**")
-
-if __name__ == "__main__":
     main()

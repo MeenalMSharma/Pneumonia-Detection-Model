@@ -68,6 +68,13 @@ def change_button():
     set_page('Pneumonia Detection')
     st.session_state.model = True
     st.session_state.project = True
+    
+def preprocess_image(image):
+    image = image.convert('L')  # Convert to grayscale if needed
+    image = image.resize((224, 224))  # Resize to match model input
+    image = np.array(image) / 255.0  # Normalize pixel values
+    image = np.expand_dims(image, axis=0)  # Add batch dimension
+    return image
 
 def prev():
     st.header("Disease Detection Deep Learning Model")
@@ -89,7 +96,18 @@ def main():
         init()
 
     draw_style()
+ st.title("Pneumonia Detection System")
+    uploaded_file = st.file_uploader("Upload a Chest X-ray", type=["jpg", "png", "jpeg"])
 
+    if uploaded_file is not None:
+        image = Image.open(uploaded_file)
+        st.image(image, caption="Uploaded X-ray", use_column_width=True)
+
+        processed_image = preprocess_image(image)
+        prediction = model.predict(processed_image)
+
+        result = "Pneumonia Detected" if prediction[0][0] > 0.5 else "No Pneumonia"
+        st.write(f"Prediction: **{result}**")
     with st.sidebar:
         project, about, contact = st.columns([0.8, 1, 1.2])
 

@@ -1,5 +1,6 @@
 from src import about, mail, home, info
 import streamlit as st
+import os
 
 def init():
     st.session_state.page = 'Homepage'
@@ -7,8 +8,11 @@ def init():
     st.session_state.model = False
 
     st.session_state.pages = {
+        'Homepage': home.main,
         'Pneumonia Detection': home.main,
-        'About the Dataset': about.main
+        'About the Dataset': about.main,
+        'About Us': about.main,  # Added this
+        'Message Us': mail.main  # Added this
     }
 
 def draw_style():
@@ -27,7 +31,10 @@ def draw_style():
     st.markdown(style, unsafe_allow_html=True)
 
 def load_page():
-    st.session_state.pages[st.session_state.page]()
+    if st.session_state.page in st.session_state.pages:
+        st.session_state.pages[st.session_state.page]()
+    else:
+        st.warning("The selected page does not exist!")
 
 def set_page(loc=None, reset=False):
     if not st.session_state.page == 'Homepage':
@@ -93,7 +100,11 @@ def main():
         st.button("About the Dataset", on_click=set_page, args=("About the Dataset",))
 
         if st.session_state.page == 'Homepage':
-            st.image("test_files/IM-0001-0001.jpeg")  # Make sure this image exists
+            img_path = "test_files/IM-0001-0001.jpeg"
+            if os.path.exists(img_path):
+                st.image(img_path)
+            else:
+                st.warning(f"Image not found: {img_path}")
 
     load_page()
 

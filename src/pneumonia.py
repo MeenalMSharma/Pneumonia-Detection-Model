@@ -10,6 +10,8 @@ def init():
     st.session_state.selected = False
 
 def main():
+    st.title("Pneumonia Detector")
+    st.write("This is the Pneumonia detection module.")
     if "cell_model" not in st.session_state:
         init()
         

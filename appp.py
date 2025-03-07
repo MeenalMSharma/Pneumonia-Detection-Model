@@ -1,4 +1,4 @@
-from src import about, mail, home, info
+from src import about, mail, home, info  # Ensure src is correctly structured
 import streamlit as st
 import os
 
@@ -11,15 +11,15 @@ def init():
         'Homepage': home.main,
         'Pneumonia Detection': home.main,
         'About the Dataset': about.main,
-        'About Us': about.main,  # Added this
-        'Message Us': mail.main  # Added this
+        'About Us': about.main,
+        'Message Us': mail.main
     }
 
 def draw_style():
     style = """
         <style>
         .stApp {
-            background-image: url("");
+            background-image: url(""); /* FIX: Provide a valid background URL or remove */
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -37,15 +37,12 @@ def load_page():
         st.warning("The selected page does not exist!")
 
 def set_page(loc=None, reset=False):
-    if not st.session_state.page == 'Homepage':
+    if st.session_state.page != 'Homepage':
         for key in list(st.session_state.keys()):
-            if key not in ('page', 'project', 'model', 'pages', 'set'):
+            if key not in ('page', 'project', 'model', 'pages'):
                 st.session_state.pop(key)
 
-    if loc:
-        st.session_state.page = loc
-    else:
-        st.session_state.page = st.session_state.set
+    st.session_state.page = loc if loc else st.session_state.get('set', 'Homepage')
 
     if reset:
         st.session_state.project = False
@@ -58,19 +55,6 @@ def change_button():
     st.session_state.model = True
     st.session_state.project = True
 
-def prev():
-    st.header("Disease Detection Deep Learning Model")
-
-    models = ["Pneumonia Detection"]
-    models_info = ["Info about Pneumonia Detection"]
-    press = [False] * len(models)
-    with st.sidebar:
-        st.title("Browse Models")
-        for i, model in enumerate(models):
-            press[i] = st.sidebar.button(model)
-            with st.expander("See Info"):
-                st.write(models_info[i])
-
 def main():
     st.set_page_config(page_title='Pneumonia Detection')
 
@@ -78,6 +62,7 @@ def main():
         init()
 
     draw_style()
+
     with st.sidebar:
         project, about, contact = st.columns([0.8, 1, 1.2])
 
@@ -98,12 +83,13 @@ def main():
         contact.button('Contact Us', on_click=set_page, args=('Message Us',))
         st.button("About the Dataset", on_click=set_page, args=("About the Dataset",))
 
+        # FIX: Handle missing image more gracefully
+        img_path = "test_files/IM-0001-0001.jpeg"
         if st.session_state.page == 'Homepage':
-            img_path = "test_files/IM-0001-0001.jpeg"
             if os.path.exists(img_path):
                 st.image(img_path)
             else:
-                st.warning(f"Image not found: {img_path}")
+                st.warning("No image available.")
 
     load_page()
 

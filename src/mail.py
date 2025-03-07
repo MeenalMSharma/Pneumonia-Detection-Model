@@ -10,19 +10,18 @@ def send_mail(sender: str, body: str, placeholder):
         time.sleep(2)
         return
 
-    # Get email credentials securely
+    # Load credentials safely
     email = os.getenv('EMAIL')
     password = os.getenv('PASSWORD')
     target = os.getenv('TARGET')
 
-    # If environment variables are not found, check Streamlit secrets
     if not email or not password or not target:
         try:
-            email = st.secrets['email']
-            password = st.secrets['password']
-            target = st.secrets['target']
+            email = st.secrets["email"]
+            password = st.secrets["password"]
+            target = st.secrets["target"]
         except KeyError:
-            placeholder.error("Email credentials are missing! Set them in `.streamlit/secrets.toml`.")
+            placeholder.error("Email credentials are missing! Add them to `.streamlit/secrets.toml`.")
             return
 
     try:
@@ -42,10 +41,12 @@ def send_mail(sender: str, body: str, placeholder):
             progress.progress(100)
             time.sleep(1)
 
-        placeholder.success('Success! We will review your message, thanks!')
+        placeholder.success('Success! Your message has been sent.')
         time.sleep(3)
         placeholder.empty()
 
+    except smtplib.SMTPAuthenticationError:
+        placeholder.error("Failed to authenticate. Check your email and password.")
     except Exception as e:
         placeholder.error(f"Failed to send email: {e}")
 
@@ -69,7 +70,7 @@ def main():
 
     if st.button('Send'):
         send_mail(sender, text, placeholder)
-        st.session_state.message_count += 1  # Increment to refresh text input
+        st.session_state.message_count += 1  # Refresh text input after sending
 
 
 if __name__ == '__main__':

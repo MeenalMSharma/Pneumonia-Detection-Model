@@ -30,7 +30,7 @@ def main():
         )
 
     with col2:
-        st.image("https://drive.google.com/file/d/1wQ_OG-5wnpDtPx4p0WFUwtcggb330ijl/view?usp=drive_link", width=260)  # Replace with actual image
+        st.image("https://drive.google.com/uc?export=view&id=1wQ_OG-5wnpDtPx4p0WFUwtcggb330ijl", width=260)
 
     # Add spacing
     st.write("---")
@@ -55,7 +55,7 @@ def main():
         )
 
     with col2:
-        st.image("https://drive.google.com/file/d/1wadp8dr8U-6c2VBBqNO3elltyDH1kmvh/view?usp=drive_link", width=260)  # Replace with actual image
+        st.image("https://drive.google.com/uc?export=view&id=1wadp8dr8U-6c2VBBqNO3elltyDH1kmvh", width=260)
 
 
 # Run the app

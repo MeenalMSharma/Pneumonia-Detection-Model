@@ -10,7 +10,7 @@ def init():
     st.session_state.pages = {
         'Homepage': home.main,
         'Pneumonia Detection': home.main,
-        'About the Dataset': about.main,
+        'About the Dataset': info.main,
         'About Us': about.main,
         'Message Us': mail.main
     }

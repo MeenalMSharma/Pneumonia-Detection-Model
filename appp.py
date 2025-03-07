@@ -1,4 +1,4 @@
-from src import about, mail, home, info  # Ensure src is correctly structured
+from src import about, mail, home, info, pneumonia  # Ensure src is correctly structured
 import streamlit as st
 import os
 

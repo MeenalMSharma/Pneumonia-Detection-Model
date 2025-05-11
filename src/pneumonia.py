@@ -97,14 +97,22 @@ def load_model():
         tf.keras.layers.Dense(4, activation="softmax")
     ])
 
+    # Ensure correct path to the weights file
     path = os.path.dirname(os.path.realpath(__file__))
-    weights_path = "Pneumonia_Detection_Model.ipynb"
+    weights_path = os.path.join(path, 'checkpoints', 'pneumonia_model_weights.h5')
 
+    # Check if weights file exists
     if not os.path.exists(weights_path):
-        st.error("Error: Model weights not found. Ensure the file exists.")
+        st.error(f"Error: Model weights not found at: {weights_path}")
         return None
 
-    model.load_weights(weights_path)
+    # Load the weights into the model
+    try:
+        model.load_weights(weights_path)
+    except Exception as e:
+        st.error(f"Error loading weights: {str(e)}")
+        return None
+
     return model
 
 if __name__ == "__main__":

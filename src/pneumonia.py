@@ -98,7 +98,7 @@ def load_model():
     ])
 
     path = os.path.dirname(os.path.realpath(__file__))
-    weights_path = f"{path}/checkpoints/bloodcell_24epochs"
+    weights_path = 
 
     if not os.path.exists(weights_path):
         st.error("Error: Model weights not found. Ensure the file exists.")

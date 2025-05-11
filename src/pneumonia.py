@@ -99,7 +99,7 @@ def load_model():
 
     # Ensure correct path to the weights file
     path = os.path.dirname(os.path.realpath(__file__))
-    weights_path = os.path.join(path, 'checkpoints', 'pneumonia_model_weights.h5')
+    weights_path = os.path.join(path, 'checkpoints', 'pneumonia_model_weights.weights.h5')
 
     # Check if weights file exists
     if not os.path.exists(weights_path):

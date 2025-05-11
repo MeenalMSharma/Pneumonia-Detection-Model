@@ -64,6 +64,10 @@ def load_model():
     path = os.path.dirname(os.path.realpath(__file__))
     weights_path = os.path.join(path, 'checkpoints', 'pneumonia_model_weights.h5')
 
+    # 🔍 Debug info
+    st.write("Debug: Looking for weights at:", weights_path)
+    st.write("Debug: File exists?", os.path.exists(weights_path)
+
     # Check if weights file exists
     if not os.path.exists(weights_path):
         st.error(f"Error: Model weights not found at: {weights_path}")

@@ -33,30 +33,39 @@ def predict(img_array):
     class_names = ["Normal", "Pneumonia"]
     return class_names[np.argmax(output)]
 
+import tensorflow as tf
+import os
+import streamlit as st
+
 def load_model():
     IMG_SHAPE = (224, 224, 3)
-    base_model = tf.keras.applications.MobileNetV2(input_shape=IMG_SHAPE, include_top=False, weights="imagenet")
-    base_model.trainable = False
+    conv_layer = tf.keras.applications.MobileNetV2(input_shape=IMG_SHAPE, include_top=False, weights="imagenet")
+    conv_layer.trainable = False
 
     model = tf.keras.Sequential([
-        base_model,
+        conv_layer,
         tf.keras.layers.GlobalAveragePooling2D(),
         tf.keras.layers.Dense(32, activation="relu"),
-        tf.keras.layers.Dense(2, activation="softmax")
+        tf.keras.layers.Dense(2, activation="softmax")  # 2 classes: Normal and Pneumonia
     ])
 
+    # Ensure correct path to the weights file
     path = os.path.dirname(os.path.realpath(__file__))
-    weights_path = os.path.join(path, '..', 'checkpoints', 'pneumonia_model_weights.weights.h5')
-    weights_path = os.path.abspath(weights_path)
+    weights_path = os.path.join(path, 'checkpoints', 'pneumonia_model_weights.weights.h5')
 
-    if os.path.exists(weights_path):
-        try:
-            model.load_weights(weights_path)
-        except Exception as e:
-            st.error(f"Failed to load weights: {e}")
-            return None
-    else:
-        st.error(f"Model weights not found at: {weights_path}")
+    # Check if weights file exists
+    if not os.path.exists(weights_path):
+        st.error(f"Error: Model weights not found at: {weights_path}")
+        return None
+
+    # Load the weights into the model
+    try:
+        model.load_weights(weights_path)
+        st.success("Model weights loaded successfully.")
+    except Exception as e:
+        st.error(f"Error loading weights: {str(e)}")
         return None
 
     return model
+if __name__ == "__main__":
+    main()

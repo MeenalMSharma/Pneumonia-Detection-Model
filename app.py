@@ -1,5 +1,5 @@
-from src import about, mail, home, info, pneumonia  # Ensure src is correctly structured
 import streamlit as st
+from src import about, mail, home, info, pneumonia  # Ensure src is correctly structured
 import os
 
 def init():
@@ -83,7 +83,7 @@ def main():
         contact.button('Contact Us', on_click=set_page, args=('Message Us',))
         st.button("About the Dataset", on_click=set_page, args=("About the Dataset",))
 
-        # FIX: Handle missing image more gracefully
+        # Handle missing image
         img_path = "test_files/IM-0001-0001.jpeg"
         if st.session_state.page == 'Homepage':
             if os.path.exists(img_path):

@@ -66,7 +66,7 @@ def load_model():
 
     # 🔍 Debug info
     st.write("Debug: Looking for weights at:", weights_path)
-    st.write("Debug: File exists?", os.path.exists(weights_path)
+    st.write("Debug: File exists?", os.path.exists(weights_path))
 
     # Check if weights file exists
     if not os.path.exists(weights_path):

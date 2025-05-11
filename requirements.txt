@@ -4,6 +4,5 @@ scikit-learn
 matplotlib
 streamlit
 tensorflow==2.11.0  # or the version you are using in Google Colab
-tensorflow-io-gcs-filesystem>=0.23.1
 Pillow
 numpy

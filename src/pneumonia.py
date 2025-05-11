@@ -6,15 +6,18 @@ import io
 
 def main():
     st.title("🔬 Pneumonia Detection")
-    st.write("Upload a chest X-ray image and model file to detect Pneumonia.")
+    st.write("Upload a chest X-ray image and a trained model file to detect Pneumonia.")
 
-    model_file = st.file_uploader("Upload the trained model (.h5 or .keras)", type=["h5", "keras"])
-    uploaded_file = st.file_uploader("Choose an X-ray image...", type=["jpg", "jpeg", "png"])
+    # Upload model
+    model_file = st.file_uploader("Upload your trained model (.keras or .h5)", type=["keras", "h5"])
+
+    # Upload image
+    uploaded_file = st.file_uploader("Upload a chest X-ray image...", type=["jpg", "jpeg", "png"])
 
     model = None
     if model_file is not None:
-        model = load_model(model_file)
-        if model is not None:
+        model = load_model_from_uploaded_file(model_file)
+        if model:
             st.success("✅ Model loaded successfully.")
 
     if uploaded_file is not None:
@@ -27,18 +30,17 @@ def main():
                 prediction = predict(model, img_array)
                 st.success(f"Prediction: **{prediction}**")
             else:
-                st.error("❌ Model not loaded. Please upload the model file.")
+                st.error("❌ Please upload a model file first.")
 
-def load_model(uploaded_file):
+def load_model_from_uploaded_file(uploaded_file):
     try:
-        # Read the uploaded file as bytes and wrap it with BytesIO
+        # Convert the uploaded file to a BytesIO object
         file_bytes = uploaded_file.read()
-        with tf.io.gfile.GFile(uploaded_file.name, 'wb') as temp_file:
-            temp_file.write(file_bytes)
-        model = tf.keras.models.load_model(uploaded_file.name)
+        bytes_io = io.BytesIO(file_bytes)
+        model = tf.keras.models.load_model(bytes_io)
         return model
     except Exception as e:
-        st.error(f"Error loading model: {str(e)}")
+        st.error(f"❌ Error loading model: {str(e)}")
         return None
 
 def predict(model, img_array):

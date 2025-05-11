@@ -98,7 +98,7 @@ def load_model():
     ])
 
     path = os.path.dirname(os.path.realpath(__file__))
-    weights_path = 
+    weights_path = "Pneumonia_Detection_Model.ipynb"
 
     if not os.path.exists(weights_path):
         st.error("Error: Model weights not found. Ensure the file exists.")

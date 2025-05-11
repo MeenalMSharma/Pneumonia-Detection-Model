@@ -3,6 +3,6 @@ opencv-python
 scikit-learn
 matplotlib
 streamlit
-tensorflow==2.11.0  # or the version you are using in Google Colab
+tensorflow
 Pillow
 numpy

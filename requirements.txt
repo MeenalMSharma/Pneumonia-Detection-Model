@@ -2,8 +2,8 @@ pandas
 opencv-python
 scikit-learn
 matplotlib
-streamlit==1.17.0  # or your current Streamlit version
+streamlit
 tensorflow==2.11.0  # or the version you are using in Google Colab
 tensorflow-io-gcs-filesystem>=0.23.1
-Pillow==8.4.0  # For image processing
-numpy==1.21.2  # Version might change based on your setup
+Pillow
+numpy

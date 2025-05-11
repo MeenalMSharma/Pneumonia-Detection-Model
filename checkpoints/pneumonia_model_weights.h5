@@ -1,4 +1,4 @@
-model.save_weights('pneumonia_model_weights.h5')
+model.save_weights('pneumonia_model_weights.weights.h5')
   import tensorflow as tf
 
 def load_model():
@@ -12,7 +12,7 @@ def load_model():
     ])
     
     # Load weights into the model
-    weights_path = 'checkpoints/pneumonia_model_weights.h5'  # Adjust path if needed
+    weights_path = 'checkpoints/pneumonia_model_weights.weights.h5'  # Adjust path if needed
     model.load_weights(weights_path)
 
     return model

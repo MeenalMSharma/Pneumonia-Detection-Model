@@ -7,6 +7,7 @@ import os
 def main():
     st.title("🔬 Pneumonia Detection")
     st.write("Upload a chest X-ray image to detect Pneumonia.")
+    st.write(f"TensorFlow version: {tf.__version__}")
 
     # Check if model is loaded in session state
     if "cell_model" not in st.session_state:

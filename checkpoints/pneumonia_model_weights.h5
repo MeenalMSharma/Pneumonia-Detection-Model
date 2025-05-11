@@ -1,0 +1,18 @@
+model.save_weights('pneumonia_model_weights.h5')
+  import tensorflow as tf
+
+def load_model():
+    # Define the model architecture (this needs to match the architecture used when saving weights)
+    IMG_SHAPE = (224, 224, 3)
+    model = tf.keras.Sequential([
+        tf.keras.applications.MobileNetV2(input_shape=IMG_SHAPE, include_top=False, weights="imagenet"),
+        tf.keras.layers.GlobalAveragePooling2D(),
+        tf.keras.layers.Dense(32, activation="relu"),
+        tf.keras.layers.Dense(4, activation="softmax")
+    ])
+    
+    # Load weights into the model
+    weights_path = 'checkpoints/pneumonia_model_weights.h5'  # Adjust path if needed
+    model.load_weights(weights_path)
+
+    return model

@@ -62,7 +62,7 @@ def load_model():
 
     # Ensure correct path to the weights file
     path = os.path.dirname(os.path.realpath(__file__))
-    weights_path = os.path.join(path, 'checkpoints', 'pneumonia_model_weights.h5')
+    weights_path = os.path.join(path, 'checkpoints', 'pneumonia_model_weights.weights.h5')
 
     # 🔍 Debug info
     st.write("Debug: Looking for weights at:", weights_path)

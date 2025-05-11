@@ -44,43 +44,20 @@ def predict(img_array):
     
     # Return prediction
     return class_names[np.argmax(output)]
-def load_model():
-    # Define model architecture
-    IMG_SHAPE = (224, 224, 3)
 
-    # Using pre-trained MobileNetV2 as base model
-    conv_layer = tf.keras.applications.MobileNetV2(input_shape=IMG_SHAPE, include_top=False, weights="imagenet")
-    conv_layer.trainable = False  # Freeze the pre-trained layers
+import tensorflow as tf
 
-    model = tf.keras.Sequential([
-        conv_layer,
-        tf.keras.layers.GlobalAveragePooling2D(),
-        tf.keras.layers.Dense(32, activation="relu"),
-        tf.keras.layers.Dense(2, activation="softmax")  # 2 classes: Normal and Pneumonia
-    ])
-
-    # Check if weights file is uploaded
-    if 'weights_file' in st.session_state:
-        weights_path = st.session_state['weights_file']
-    else:
-        # Ensure the correct path if the file is not uploaded
-        path = os.path.dirname(os.path.realpath(__file__))
-        weights_path = os.path.join(path, 'checkpoints', 'pneumonia_model_weights.weights.h5')
-
-    # Check if weights file exists
-    if not os.path.exists(weights_path):
-        st.error(f"Error: Model weights not found at: {weights_path}")
-        return None
-
-    # Load the weights into the model
+def load_model(model_file):
+    """Load the model from the uploaded file."""
     try:
-        model.load_weights(weights_path)
-        st.success("Model weights loaded successfully.")
+        if model_file.name.endswith('.h5'):
+            model = tf.keras.models.load_model(model_file)  # For .h5 format
+        elif model_file.name.endswith('.keras'):
+            model = tf.keras.models.load_model(model_file)  # For .keras format
+        return model
     except Exception as e:
-        st.error(f"Error loading weights: {str(e)}")
+        st.error(f"Error loading model: {str(e)}")
         return None
-
-    return model
 
 if __name__ == "__main__":
     main()

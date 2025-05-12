@@ -97,7 +97,8 @@ def main():
             st.image(img2_path)
         else:
             st.warning("No image available.")
-load_page()
+            
+    load_page()
 
 if __name__ == '__main__':
     main()

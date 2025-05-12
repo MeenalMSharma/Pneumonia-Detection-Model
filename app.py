@@ -11,9 +11,9 @@ def init():
         'Homepage': home.main,
         'About Us': about.main,
         'Contact Us': mail.main,
-        'About the Dataset': info.main
         'Pneumonia Detection': pneumonia.main,
         'Brain Tumor Detection': braintumor.main,
+        'About the Dataset': info.main
     }
 
 def draw_style():

@@ -70,33 +70,36 @@ def main():
             project.button('Models', on_click=change_button)
         else:
             project.button('Home', on_click=set_page, args=('Homepage', True))
-if st.session_state.project and st.session_state.model:
-    selected_model = st.radio(
-        'Models',
-        ['Pneumonia Detection', 'Brain Tumor Detection'],  # Add Brain Tumor as an option
-        key='set',
-        on_change=set_page,
-    )
 
-        about_btn.button('About Us', on_click=set_page, args=('About Us',))
-        contact.button('Contact Us', on_click=set_page, args=('Message Us',))
-        st.button("About the Dataset", on_click=set_page, args=("About the Dataset",))
+        if st.session_state.project and st.session_state.model:
+            selected_model = st.radio(
+                'Models',
+                ['Pneumonia Detection', 'Brain Tumor Detection'],  # Add Brain Tumor as an option
+                key='set',
+                on_change=set_page,
+            )
 
-        # Optional homepage image
-        img_path = "test_files/p1.jpeg"
-        img2_path = "test_files/bt1.jpeg"
-        img3_path = "test_files/p2.jpeg"
-        img4_path = "test_files/bt2.jpeg"
-        if st.session_state.page in ['Homepage', 'About the Dataset']:
-            if os.path.exists(img_path):
-                st.image(img_path)
-            else:
-                st.warning("No image available.")
+            about_btn.button('About Us', on_click=set_page, args=('About Us',))
+            contact.button('Contact Us', on_click=set_page, args=('Message Us',))
+            st.button("About the Dataset", on_click=set_page, args=("About the Dataset",))
 
-            if os.path.exists(img2_path):
-                st.image(img2_path)
-            else:
-                st.warning("No image available.")
+            # Optional homepage image
+            img_path = "test_files/p1.jpeg"
+            img2_path = "test_files/bt1.jpeg"
+            img3_path = "test_files/p2.jpeg"
+            img4_path = "test_files/bt2.jpeg"
+
+            if st.session_state.page in ['Homepage', 'About the Dataset']:
+                if os.path.exists(img_path):
+                    st.image(img_path)
+                else:
+                    st.warning("No image available.")
+
+                if os.path.exists(img2_path):
+                    st.image(img2_path)
+                else:
+                    st.warning("No image available.")
+
     load_page()
 
 if __name__ == '__main__':

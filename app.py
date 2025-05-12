@@ -100,4 +100,4 @@ if st.session_state.project and st.session_state.model:
 load_page()
 
 if __name__ == '__main__':
-main()
+    main()

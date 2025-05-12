@@ -41,7 +41,6 @@ def set_page(loc=None, reset=False):
             if key not in ('page', 'project', 'model', 'pages'):
                 st.session_state.pop(key)
 
-```
 st.session_state.page = loc if loc else st.session_state.get('set', 'Homepage')
 
 if reset:
@@ -49,7 +48,6 @@ if reset:
 elif st.session_state.page in ('Message Us', 'About Us'):
     st.session_state.project = True
     st.session_state.model = False
-```
 
 def change_button():
     set_page('Pneumonia Detection')
@@ -59,7 +57,6 @@ def change_button():
 def main():
     st.set_page_config(page_title='Pneumonia Detection')
 
-```
 if 'page' not in st.session_state:
     init()
 
@@ -72,7 +69,6 @@ with st.sidebar:
         project.button('Models', on_click=change_button)
     else:
         project.button('Home', on_click=set_page, args=('Homepage', True))
-```
 
 if st.session_state.project and st.session_state.model:
     selected_model = st.radio(
@@ -82,7 +78,6 @@ if st.session_state.project and st.session_state.model:
         on_change=set_page,
     )
 
-```
     about_btn.button('About Us', on_click=set_page, args=('About Us',))
     contact.button('Contact Us', on_click=set_page, args=('Message Us',))
     st.button("About the Dataset", on_click=set_page, args=("About the Dataset",))
@@ -103,7 +98,6 @@ if st.session_state.project and st.session_state.model:
         else:
             st.warning("No image available.")
 load_page()
-```
 
 if __name__ == '__main__':
 main()

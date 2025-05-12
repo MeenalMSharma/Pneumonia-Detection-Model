@@ -1,4 +1,5 @@
 import streamlit as st
+from PIL import Image
 
 def main():
     # Title and header
@@ -30,7 +31,8 @@ def main():
         )
 
     with col2:
-        st.image("test_files/A.jpeg", width=260)
+        img = Image.open("test_files/A.jpeg")
+        st.image(img, width=260)
 
     # Add spacing
     st.write("---")
@@ -55,7 +57,8 @@ def main():
         )
 
     with col2:
-        st.image("test_files/M.jpeg", width=260)
+        img2 = Image.open("test_files/M.jpeg")
+        st.image(img2, width=260)
 
 
 # Run the app

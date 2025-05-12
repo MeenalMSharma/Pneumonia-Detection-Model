@@ -56,31 +56,31 @@ def change_button():
 
 def main():
     st.set_page_config(page_title='Pneumonia Detection')
-
-if 'page' not in st.session_state:
-    init()
-
-draw_style()
-
-with st.sidebar:
-    project, about_btn, contact = st.columns([0.8, 1, 1.2])
     
-    if not st.session_state.project:
-        project.button('Models', on_click=change_button)
-    else:
-        project.button('Home', on_click=set_page, args=('Homepage', True))
-
-if st.session_state.project and st.session_state.model:
-    selected_model = st.radio(
-        'Models',
-        ['Pneumonia Detection', 'Brain Tumor Detection'],  # Add Brain Tumor as an option
-        key='set',
-        on_change=set_page,
-    )
-
-    about_btn.button('About Us', on_click=set_page, args=('About Us',))
-    contact.button('Contact Us', on_click=set_page, args=('Message Us',))
-    st.button("About the Dataset", on_click=set_page, args=("About the Dataset",))
+    if 'page' not in st.session_state:
+        init()
+        
+        draw_style()
+        
+        with st.sidebar:
+            project, about_btn, contact = st.columns([0.8, 1, 1.2])
+            
+            if not st.session_state.project:
+                project.button('Models', on_click=change_button)
+            else:
+                project.button('Home', on_click=set_page, args=('Homepage', True))
+                
+            if st.session_state.project and st.session_state.model:
+                selected_model = st.radio(
+                    'Models',
+                    ['Pneumonia Detection', 'Brain Tumor Detection'],  # Add Brain Tumor as an option
+                    key='set',
+                    on_change=set_page,
+                )
+                
+                about_btn.button('About Us', on_click=set_page, args=('About Us',))
+                contact.button('Contact Us', on_click=set_page, args=('Message Us',))
+                st.button("About the Dataset", on_click=set_page, args=("About the Dataset",))
 
     # Optional homepage image
     img_path = "test_files/p1.jpeg"

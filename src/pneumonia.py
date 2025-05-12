@@ -19,6 +19,7 @@ def main():
         model = load_model_from_uploaded_file(model_file)
         if model:
             st.success("✅ Model loaded successfully.")
+            st.write(f"Model input shape: {model.input_shape}")  # Log model's expected input shape
 
     if uploaded_file is not None:
         # Open image, convert, and resize to match model input

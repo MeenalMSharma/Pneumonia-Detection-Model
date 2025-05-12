@@ -1,4 +1,4 @@
-from src import about, home, info, mail, pneumonia
+from src import about, braintumor, home, info, mail, pneumonia
 import streamlit as st
 import os
 

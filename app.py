@@ -19,7 +19,7 @@ def draw_style():
     style = """
         <style>
         .stApp {
-            background-image: url("");  /* Optional: Add your image URL or leave blank */
+            background-image: url("bt1.jpeg");  /* Optional: Add your image URL or leave blank */
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;

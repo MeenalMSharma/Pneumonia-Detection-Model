@@ -60,7 +60,7 @@ def load_model_from_uploaded_file(uploaded_file):
 def predict(model, input_tensor):
     try:
         output = model.predict(input_tensor)
-        class_names = ["Normal", "Meningioma"]
+        class_names = ["Normal", "Pneumonia"]
         return class_names[np.argmax(output)]
     except Exception as e:
         st.error(f"Prediction error: {str(e)}")

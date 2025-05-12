@@ -59,7 +59,7 @@ def set_page(loc=None, reset=False):
         pass
 
 def change_button():
-    set_page('Pneumonia Detection')
+    set_page('Brain Tumor Detection')
     st.session_state.model = True
     st.session_state.project = True
 
@@ -93,7 +93,7 @@ def main():
         if st.session_state.project and st.session_state.model:
             st.radio(
                 'Models',
-                ['Pneumonia Detection','Brain Tumor Detection'],
+                ['Brain Tumor Detection','Pneumonia Detection'],
                 key='set',
                 on_change=set_page,
             )

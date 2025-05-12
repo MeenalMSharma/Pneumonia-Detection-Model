@@ -28,7 +28,7 @@ def main():
         # Ensure that the image shape is correct
         st.write(f"Image shape after resize: {img_array.shape}")  # Debugging line
 
-        st.image(image, caption="Uploaded Image", use_column_width=True)
+        st.image(image, caption="Uploaded Image", use_container_width=True)
 
         if st.button("Predict"):
             if model is not None:

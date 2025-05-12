@@ -3,9 +3,10 @@ from src import about, home, info, mail, pneumonia
 import os
 
 def init():
-st.session\_state.page = 'Homepage'
-st.session\_state.project = False
-st.session\_state.model = False
+    
+    st.session\_state.page = 'Homepage'
+    st.session\_state.project = False
+    st.session\_state.model = False
 
 ```
 st.session_state.pages = {

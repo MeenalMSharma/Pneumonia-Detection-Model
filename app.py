@@ -1,6 +1,7 @@
 import streamlit as st
 from src import about, home, info, mail, pneumonia
 import os
+import base64
 
 def init():
     st.session_state.page = 'Homepage'
@@ -16,19 +17,24 @@ def init():
     }
 
 def draw_style():
-    style = """
+    with open("bt1.jpeg", "rb") as image_file:
+        encoded = base64.b64encode(image_file.read()).decode()
+
+    st.markdown(
+        f"""
         <style>
-        .stApp {
-            background-image: url('https://raw.githubusercontent.com/your-username/your-repo/main/path/to/bt1.jpeg');  /* Optional: Add your image URL or leave blank */
+        .stApp {{
+            background-image: url("data:image/jpeg;base64,{encoded}");
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-        }
-        header {visibility: visible;}
-        footer {visibility: hidden;} 
+        }}
+        header {{visibility: visible;}}
+        footer {{visibility: hidden;}}
         </style>
-    """
-    st.markdown(style, unsafe_allow_html=True)
+        """,
+        unsafe_allow_html=True
+    )
 
 def load_page():
     if st.session_state.page in st.session_state.pages:

@@ -32,11 +32,9 @@ def main():
 
             if st.button("Predict"):
                 if model is not None:
-                    # Flatten the image if required
-                    img_array_flattened = img_array.flatten()  # Flatten the image to 1D
-                    img_array_flattened = np.expand_dims(img_array_flattened, axis=0)  # Add batch dimension (1, 256*256*3)
-                    st.write(f"Input shape after flattening: {img_array_flattened.shape}")  # Debugging line
-                    prediction = predict(model, img_array_flattened)
+                    input_tensor = np.expand_dims(img_array, axis=0)  # Add batch dimension (1, 256, 256, 3)
+                    st.write(f"Input shape: {input_tensor.shape}")  # Debugging line
+                    prediction = predict(model, input_tensor)
                     st.success(f"Prediction: **{prediction}**")
                 else:
                     st.error("Model not loaded. Please upload the model file.")

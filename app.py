@@ -15,8 +15,6 @@ def init():
         'About Us': about.main,
         'Message Us': mail.main
     }
-```
-
 def draw_style():
     style = """
     <style>

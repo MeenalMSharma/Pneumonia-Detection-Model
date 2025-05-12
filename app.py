@@ -1,5 +1,5 @@
 import streamlit as st
-from src import about, home, info, mail, pneumonia  # Ensure src is correctly structured
+from src import about, home, info, mail, pneumonia
 import os
 
 def init():
@@ -19,7 +19,7 @@ def draw_style():
     style = """
         <style>
         .stApp {
-            background-image: url(""); /* FIX: Provide a valid background URL or remove */
+            background-image: url("");  /* Optional: Add your image URL or leave blank */
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -64,7 +64,7 @@ def main():
     draw_style()
 
     with st.sidebar:
-        project, about, contact = st.columns([0.8, 1, 1.2])
+        project, about_btn, contact = st.columns([0.8, 1, 1.2])
 
         if not st.session_state.project:
             project.button('Models', on_click=change_button)
@@ -79,11 +79,11 @@ def main():
                 on_change=set_page,
             )
 
-        about.button('About Us', on_click=set_page, args=('About Us',))
+        about_btn.button('About Us', on_click=set_page, args=('About Us',))
         contact.button('Contact Us', on_click=set_page, args=('Message Us',))
         st.button("About the Dataset", on_click=set_page, args=("About the Dataset",))
 
-        # Handle missing image
+        # Optional homepage image
         img_path = "test_files/IM-0001-0001.jpeg"
         if st.session_state.page == 'Homepage':
             if os.path.exists(img_path):

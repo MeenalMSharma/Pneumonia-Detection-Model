@@ -19,28 +19,30 @@ def main():
         model = load_model_from_uploaded_file(model_file)
         if model:
             st.success("✅ Model loaded successfully.")
-            # Log model input shape
-            st.write(f"Model input shape: {model.input_shape}")  # Display model input shape
+
     if uploaded_file is not None:
-    # Open image, convert, and resize to match model input
-    image = Image.open(uploaded_file).convert("RGB").resize((256, 256))  # Resize image to 256x256
-    img_array = np.array(image).astype(np.float32) / 255.0  # Normalize the image
+        try:
+            # Open image, convert, and resize to match model input
+            image = Image.open(uploaded_file).convert("RGB").resize((256, 256))  # Resize image to 256x256
+            img_array = np.array(image).astype(np.float32) / 255.0  # Normalize the image
 
-    # Flatten the image if required
-    img_array_flattened = img_array.flatten()  # Flatten the image to 1D
-    img_array_flattened = np.expand_dims(img_array_flattened, axis=0)  # Add batch dimension (1, 256*256*3)
+            # Ensure that the image shape is correct
+            st.write(f"Image shape after resize: {img_array.shape}")  # Debugging line
+            st.image(image, caption="Uploaded Image", use_container_width=True)
 
-    # Ensure that the image shape is correct
-    st.write(f"Image shape after flattening: {img_array_flattened.shape}")  # Debugging line
+            if st.button("Predict"):
+                if model is not None:
+                    # Flatten the image if required
+                    img_array_flattened = img_array.flatten()  # Flatten the image to 1D
+                    img_array_flattened = np.expand_dims(img_array_flattened, axis=0)  # Add batch dimension (1, 256*256*3)
+                    st.write(f"Input shape after flattening: {img_array_flattened.shape}")  # Debugging line
+                    prediction = predict(model, img_array_flattened)
+                    st.success(f"Prediction: **{prediction}**")
+                else:
+                    st.error("Model not loaded. Please upload the model file.")
 
-    st.image(image, caption="Uploaded Image", use_container_width=True)
-
-    if st.button("Predict"):
-        if model is not None:
-            prediction = predict(model, img_array_flattened)
-            st.success(f"Prediction: **{prediction}**")
-        else:
-            st.error("Model not loaded. Please upload the model file.")
+        except Exception as e:
+            st.error(f"Error processing image: {str(e)}")
 
 def load_model_from_uploaded_file(uploaded_file):
     try:

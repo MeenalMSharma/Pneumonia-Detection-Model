@@ -1,5 +1,5 @@
 import streamlit as st
-from src import __init__.py, about, home, info, mail, pneumonia  # Ensure src is correctly structured
+from src import about, home, info, mail, pneumonia  # Ensure src is correctly structured
 import os
 
 def init():

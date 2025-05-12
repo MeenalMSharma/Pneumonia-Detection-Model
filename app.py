@@ -59,7 +59,7 @@ def set_page(loc=None, reset=False):
         pass
 
 def change_button():
-    set_page('Brain Tumor Detection')
+    set_page('Pneumonia Detection')
     st.session_state.model = True
     st.session_state.project = True
 

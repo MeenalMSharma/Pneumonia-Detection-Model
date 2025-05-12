@@ -1,7 +1,6 @@
 import streamlit as st
 import smtplib
 import time
-import os
 
 def send_mail(sender: str, body: str, placeholder):
     if not sender or not body:
@@ -30,20 +29,20 @@ def send_mail(sender: str, body: str, placeholder):
             conn = smtplib.SMTP('smtp.gmail.com', 587)
             progress_bar.progress(10)
             conn.ehlo()
-            progress_bar.progress(20)
+            progress_bar.progress(30)
             conn.starttls()
-            progress_bar.progress(40)
+            progress_bar.progress(50)
             conn.login(email, password)
-            progress_bar.progress(60)
+            progress_bar.progress(70)
             conn.sendmail(email, target, f'Subject: From {sender}\n\n{body}')
-            progress_bar.progress(80)
+            progress_bar.progress(90)
             conn.quit()
             progress_bar.progress(100)
             time.sleep(1)
 
         placeholder.success('Success! We will review your message, thanks!')
         time.sleep(3)
-        placeholder.empty()
+        placeholder.empty()  # Clear the placeholder after success
 
     except Exception as e:
         placeholder.error(f"Failed to send email: {e}")

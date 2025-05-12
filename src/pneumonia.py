@@ -44,7 +44,8 @@ def load_model_from_uploaded_file(uploaded_file):
         return None
 
 def predict(model, img_array):
-    input_tensor = tf.expand_dims(img_array, axis=0)
+    """Make a prediction with the loaded model."""
+    input_tensor = np.expand_dims(img_array, axis=0).astype(np.float32)
     output = model.predict(input_tensor)
     class_names = ["Normal", "Pneumonia"]
     return class_names[np.argmax(output)]

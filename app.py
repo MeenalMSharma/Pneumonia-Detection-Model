@@ -40,8 +40,7 @@ def set_page(loc=None, reset=False):
         for key in list(st.session_state.keys()):
             if key not in ('page', 'project', 'model', 'pages'):
                 st.session_state.pop(key)
-
-st.session_state.page = loc if loc else st.session_state.get('set', 'Homepage')
+                st.session_state.page = loc if loc else st.session_state.get('set', 'Homepage')
 
 if reset:
     st.session_state.project = False

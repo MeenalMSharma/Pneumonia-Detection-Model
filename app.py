@@ -77,7 +77,7 @@ def prev():
                 st.write(models_info[i])
 
 def main():
-    if 'page' not in st.session_state:
+    if 'page' not in st.session_state or 'pages' not in st.session_state:
         init()
 
     draw_style()

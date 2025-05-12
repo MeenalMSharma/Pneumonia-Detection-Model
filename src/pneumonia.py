@@ -32,7 +32,8 @@ def main():
 
         if st.button("Predict"):
             if model is not None:
-                input_tensor = np.expand_dims(img_array, axis=0)  # Add batch dimension (1, 224, 224, 3)
+                # Add batch dimension: (1, 224, 224, 3)
+                input_tensor = np.expand_dims(img_array, axis=0)  
                 st.write(f"Input shape: {input_tensor.shape}")  # Debugging line
                 prediction = predict(model, input_tensor)
                 st.success(f"Prediction: **{prediction}**")
@@ -52,6 +53,8 @@ def load_model_from_uploaded_file(uploaded_file):
 
 def predict(model, input_tensor):
     try:
+        # Ensure model input compatibility
+        st.write(f"Model input shape: {model.input_shape}")  # Debugging line
         output = model.predict(input_tensor)
         class_names = ["Normal", "Pneumonia"]
         return class_names[np.argmax(output)]

@@ -78,23 +78,6 @@ if st.session_state.project and st.session_state.model:
         on_change=set_page,
     )
 
-    # Set the image paths based on the selected model
-    img3_path = "test_files/pneumonia_model.png"  # Replace with your actual path
-    img4_path = "test_files/brain_tumor_model.png"
-
-    # Check which model is selected and display the corresponding image
-    if selected_model == "Pneumonia Detection":
-        if os.path.exists(img3_path):
-            st.image(img3_path, caption="Pneumonia Detection Model", use_column_width=True)
-        else:
-            st.warning("Pneumonia model image not available.")
-
-    elif selected_model == "Brain Tumor Detection":
-        if os.path.exists(img4_path):
-            st.image(img4_path, caption="Brain Tumor Detection Model", use_column_width=True)
-        else:
-            st.warning("Brain Tumor model image not available.")
-
         about_btn.button('About Us', on_click=set_page, args=('About Us',))
         contact.button('Contact Us', on_click=set_page, args=('Message Us',))
         st.button("About the Dataset", on_click=set_page, args=("About the Dataset",))

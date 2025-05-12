@@ -36,6 +36,13 @@ def main():
             if model is not None:
                 input_tensor = np.expand_dims(img_array, axis=0)  # Add batch dimension (1, 224, 224, 3)
                 st.write(f"Input shape to the model: {input_tensor.shape}")  # Log the input shape to the model
+                
+                # Check if the model requires flattening
+                if len(input_tensor.shape) == 4 and input_tensor.shape[1:] == (224, 224, 3):
+                    # Flatten the input to match the model's expected shape (this will change based on model architecture)
+                    input_tensor = input_tensor.flatten().reshape(-1, 12544)
+                    st.write(f"Flattened input shape: {input_tensor.shape}")  # Log the flattened input shape
+
                 prediction = predict(model, input_tensor)
                 st.success(f"Prediction: **{prediction}**")
             else:

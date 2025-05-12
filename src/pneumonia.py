@@ -2,7 +2,7 @@ import streamlit as st
 import tensorflow as tf
 from PIL import Image
 import numpy as np
-import io
+import tempfile
 
 def main():
     st.title("🔬 Pneumonia Detection")
@@ -34,10 +34,10 @@ def main():
 
 def load_model_from_uploaded_file(uploaded_file):
     try:
-        # Convert the uploaded file to a BytesIO object
-        file_bytes = uploaded_file.read()
-        bytes_io = io.BytesIO(file_bytes)
-        model = tf.keras.models.load_model(bytes_io)
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".keras") as tmp:
+            tmp.write(uploaded_file.read())
+            tmp_path = tmp.name
+        model = tf.keras.models.load_model(tmp_path)
         return model
     except Exception as e:
         st.error(f"❌ Error loading model: {str(e)}")

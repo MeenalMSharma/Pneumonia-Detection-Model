@@ -1,7 +1,6 @@
-
 from src import about, home, info, mail, pneumonia
 import streamlit as st
-
+import os
 
 def init():
     st.session_state.page = 'Homepage'

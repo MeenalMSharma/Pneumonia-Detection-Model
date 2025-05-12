@@ -71,14 +71,13 @@ def main():
         else:
             project.button('Home', on_click=set_page, args=('Homepage', True))
 
-        if st.session_state.project and st.session_state.model:
-            st.radio(
-                'Models',
-                ['Pneumonia Detection'],
-                key='set',
-                on_change=set_page,
-            )
-
+       if st.session_state.project and st.session_state.model:
+    selected_model = st.radio(
+        'Models',
+        ['Pneumonia Detection', 'Brain Tumor Detection'], 
+        key='set',
+        on_change=set_page,
+    )
         about_btn.button('About Us', on_click=set_page, args=('About Us',))
         contact.button('Contact Us', on_click=set_page, args=('Message Us',))
         st.button("About the Dataset", on_click=set_page, args=("About the Dataset",))
@@ -86,7 +85,9 @@ def main():
         # Optional homepage image
         img_path = "test_files/p1.jpeg"
         img2_path = "test_files/bt1.jpeg"
-        if st.session_state.page == 'Homepage':
+        img3_path = "test_files/p2.jpeg"
+        img4_path = "test_files/bt2.jpeg"
+        if st.session_state.page in ['Homepage', 'About the Dataset']:
             if os.path.exists(img_path):
                 st.image(img_path)
             else:
@@ -96,6 +97,17 @@ def main():
                 st.image(img2_path)
             else:
                 st.warning("No image available.")
+        if selected_model == "Pneumonia Detection":
+    if os.path.exists(img3_path):
+            st.image(img3_path, caption="Pneumonia Detection Model", use_column_width=True)
+        else:
+            st.warning("Pneumonia model image not available.")
+
+    elif selected_model == "Brain Tumor Detection":
+        if os.path.exists(img4_path):
+            st.image(img4_path, caption="Brain Tumor Detection Model", use_column_width=True)
+        else:
+            st.warning("Brain Tumor model image not available.")
 
     load_page()
 

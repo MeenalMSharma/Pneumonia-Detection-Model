@@ -21,14 +21,19 @@ def main():
             st.success("✅ Model loaded successfully.")
 
     if uploaded_file is not None:
-        image = Image.open(uploaded_file).convert("RGB").resize((224, 224))
-        img_array = np.array(image).astype(np.float32) / 255.0
+        # Open image, convert, and resize to match model input
+        image = Image.open(uploaded_file).convert("RGB").resize((224, 224))  # Resize image to 224x224
+        img_array = np.array(image).astype(np.float32) / 255.0  # Normalize the image
+
+        # Ensure that the image shape is correct
+        st.write(f"Image shape after resize: {img_array.shape}")  # Debugging line
 
         st.image(image, caption="Uploaded Image", use_column_width=True)
 
         if st.button("Predict"):
             if model is not None:
-                input_tensor = np.expand_dims(img_array, axis=0)  # Shape: (1, 224, 224, 3)
+                input_tensor = np.expand_dims(img_array, axis=0)  # Add batch dimension (1, 224, 224, 3)
+                st.write(f"Input shape: {input_tensor.shape}")  # Debugging line
                 prediction = predict(model, input_tensor)
                 st.success(f"Prediction: **{prediction}**")
             else:
@@ -46,9 +51,13 @@ def load_model_from_uploaded_file(uploaded_file):
         return None
 
 def predict(model, input_tensor):
-    output = model.predict(input_tensor)
-    class_names = ["Normal", "Pneumonia"]
-    return class_names[np.argmax(output)]
+    try:
+        output = model.predict(input_tensor)
+        class_names = ["Normal", "Pneumonia"]
+        return class_names[np.argmax(output)]
+    except Exception as e:
+        st.error(f"Prediction error: {str(e)}")
+        return None
 
 if __name__ == "__main__":
     main()

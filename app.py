@@ -32,7 +32,7 @@ background-position: center;
         </style>
     """
 
-    st.set_page_config(page_title='PreCare Detection Model',)
+    st.set_page_config(page_title='PreCare Disease Detection Model',)
     
     st.markdown(style, unsafe_allow_html=True)
 
@@ -93,7 +93,7 @@ def main():
         if st.session_state.project and st.session_state.model:
             st.radio(
                 'Models',
-                ['Brain Tumor Detection','Pneumonia Detection'],
+                ['Pneumonia Detection','Brain Tumor Detection'],
                 key='set',
                 on_change=set_page,
             )

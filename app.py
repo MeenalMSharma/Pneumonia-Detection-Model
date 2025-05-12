@@ -84,7 +84,7 @@ def main():
         st.button("About the Dataset", on_click=set_page, args=("About the Dataset",))
 
         # Optional homepage image
-        img_path = "bt1.jpeg"
+        img_path = "test_files/bt1.jpeg"
         if st.session_state.page == 'Homepage':
             if os.path.exists(img_path):
                 st.image(img_path)

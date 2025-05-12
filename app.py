@@ -101,7 +101,7 @@ def main():
         about.button('About Us', on_click=set_page, args=('About Us',))
 
         contact.button(
-            'Contact Us', on_click=set_page, args=('Message Us',)
+            'Contact Us', on_click=set_page, args=('Contact Us',)
         )
         st.button("About the Dataset",on_click=set_page,args=("About the Dataset",))
         

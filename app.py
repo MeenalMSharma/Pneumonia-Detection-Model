@@ -105,22 +105,21 @@ def main():
             'Contact Us', on_click=set_page, args=('Message Us',)
         )
         st.button("About the Dataset",on_click=set_page,args=("About the Dataset",))
-
+        
+    if st.session_state.page in ['Homepage', 'About the Dataset']:
         img_path = "test_files/p1.jpeg"
         img2_path = "test_files/bt1.jpeg"
-        if st.session_state.page in ['Homepage', 'About the Dataset']:
-            if os.path.exists(img_path):
-                st.image(img_path)
-            else:
-                st.warning("No image available.")
-                
-            if os.path.exists(img2_path):
-                st.image(img2_path)
-            else:
-                st.warning("No image available.")
+        if os.path.exists(img_path):
+            st.image(img_path)
+        else:
+            st.warning("No image available.")
         
-        load_page()
-
+        if os.path.exists(img2_path):
+            st.image(img2_path)
+        else:
+            st.warning("No image available.")
+    
+    load_page()
 
 if __name__ == '__main__':
     main()

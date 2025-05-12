@@ -21,16 +21,18 @@ def main():
             st.success("✅ Model loaded successfully.")
 
     if uploaded_file is not None:
-        image = Image.open(uploaded_file).convert("RGB").resize((224, 224))
-        img_array = np.array(image) / 255.0
-        st.image(image, caption="Uploaded Image", use_column_width=True)
+    image = Image.open(uploaded_file).convert("RGB").resize((224, 224))
+    img_array = np.array(image).astype(np.float32) / 255.0
 
-        if st.button("Predict"):
-            if model is not None:
-                prediction = predict(model, img_array)
-                st.success(f"Prediction: **{prediction}**")
-            else:
-                st.error("❌ Please upload a model file first.")
+    st.image(image, caption="Uploaded Image", use_column_width=True)
+
+    if st.button("Predict"):
+        if model is not None:
+            input_tensor = np.expand_dims(img_array, axis=0)  # Shape: (1, 224, 224, 3)
+            prediction = predict(model, input_tensor)
+            st.success(f"Prediction: **{prediction}**")
+        else:
+            st.error("Model not loaded. Please upload the model file.")
 
 def load_model_from_uploaded_file(uploaded_file):
     try:
@@ -43,9 +45,7 @@ def load_model_from_uploaded_file(uploaded_file):
         st.error(f"❌ Error loading model: {str(e)}")
         return None
 
-def predict(model, img_array):
-    """Make a prediction with the loaded model."""
-    input_tensor = np.expand_dims(img_array, axis=0).astype(np.float32)
+def predict(model, input_tensor):
     output = model.predict(input_tensor)
     class_names = ["Normal", "Pneumonia"]
     return class_names[np.argmax(output)]

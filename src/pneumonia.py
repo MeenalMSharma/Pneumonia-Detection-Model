@@ -21,32 +21,26 @@ def main():
             st.success("✅ Model loaded successfully.")
             # Log model input shape
             st.write(f"Model input shape: {model.input_shape}")  # Display model input shape
-
     if uploaded_file is not None:
-        # Open image, convert, and resize to match model input
-        image = Image.open(uploaded_file).convert("RGB").resize((224, 224))  # Resize image to 224x224
-        img_array = np.array(image).astype(np.float32) / 255.0  # Normalize the image
+    # Open image, convert, and resize to match model input
+    image = Image.open(uploaded_file).convert("RGB").resize((256, 256))  # Resize image to 256x256
+    img_array = np.array(image).astype(np.float32) / 255.0  # Normalize the image
 
-        # Ensure that the image shape is correct
-        st.write(f"Image shape after resize: {img_array.shape}")  # Log image shape after resizing
+    # Flatten the image if required
+    img_array_flattened = img_array.flatten()  # Flatten the image to 1D
+    img_array_flattened = np.expand_dims(img_array_flattened, axis=0)  # Add batch dimension (1, 256*256*3)
 
-        st.image(image, caption="Uploaded Image", use_container_width=True)
+    # Ensure that the image shape is correct
+    st.write(f"Image shape after flattening: {img_array_flattened.shape}")  # Debugging line
 
-        if st.button("Predict"):
-            if model is not None:
-                input_tensor = np.expand_dims(img_array, axis=0)  # Add batch dimension (1, 224, 224, 3)
-                st.write(f"Input shape to the model: {input_tensor.shape}")  # Log the input shape to the model
-                
-                # Check if the model requires flattening
-                if len(input_tensor.shape) == 4 and input_tensor.shape[1:] == (224, 224, 3):
-                    # Flatten the input to match the model's expected shape (this will change based on model architecture)
-                    input_tensor = input_tensor.flatten().reshape(-1, 12544)
-                    st.write(f"Flattened input shape: {input_tensor.shape}")  # Log the flattened input shape
+    st.image(image, caption="Uploaded Image", use_container_width=True)
 
-                prediction = predict(model, input_tensor)
-                st.success(f"Prediction: **{prediction}**")
-            else:
-                st.error("Model not loaded. Please upload the model file.")
+    if st.button("Predict"):
+        if model is not None:
+            prediction = predict(model, img_array_flattened)
+            st.success(f"Prediction: **{prediction}**")
+        else:
+            st.error("Model not loaded. Please upload the model file.")
 
 def load_model_from_uploaded_file(uploaded_file):
     try:

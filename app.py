@@ -7,8 +7,7 @@ def init():
     st.session_state.page = 'Homepage'
     st.session_state.project = False
     st.session_state.model = False
-
-```
+    
     st.session_state.pages = {
         'Homepage': home.main,
         'Pneumonia Detection': pneumonia.main,

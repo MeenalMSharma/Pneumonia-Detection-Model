@@ -32,11 +32,10 @@ def main():
             st.image(image, caption="Uploaded MRI", use_container_width=True)
             st.write(f"Image shape after resize: {img_array.shape}")  # Debug info
 
-            # Ensure the image shape is correct (150, 150, 3)
-            if img_array.shape == (150, 150, 3):
-                # Add batch dimension
-                input_tensor = np.expand_dims(img_array, axis=0)  # Shape: (1, 150, 150, 3)
+            # Add batch dimension (1 image, so shape becomes (1, 150, 150, 3))
+            input_tensor = np.expand_dims(img_array, axis=0)  # Shape: (1, 150, 150, 3)
 
+            if input_tensor.shape == (1, 150, 150, 3):  # Ensure image shape matches expected
                 if st.button("Predict"):
                     if model is not None:
                         prediction = predict(model, input_tensor)
@@ -44,7 +43,7 @@ def main():
                     else:
                         st.error("Model not loaded. Please upload the model file.")
             else:
-                st.error(f"Image shape is incorrect. Expected shape: (150, 150, 3), but got: {img_array.shape}")
+                st.error(f"Image shape is incorrect. Expected shape: {input_shape}, but got: {input_tensor.shape}")
         except Exception as e:
             st.error(f"Error processing image: {str(e)}")
 

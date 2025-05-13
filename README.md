@@ -142,6 +142,7 @@ ResNet, short for Residual Network, introduces the concept of skip connections (
 
 <p align="center">Fig. 7: Model Architecture of ResNet.</p>
 The model was trained for 20 epochs using the Adam optimizer with a learning rate of 0.001. The sparse categorical crossentropy loss function was used due to the multi-class classification nature of the brain tumor detection task. As shown in Fig. 8, the model shows a consistent increase in accuracy, stabilizing around 86% after 20 epochs.
+
 ![image](https://raw.githubusercontent.com/MeenalMSharma/Pneumonia-Detection-Model/main/test_files/resnet.jpeg)
 <p align="center">Fig. 8: Accuracy for ResNet.</p><br>
 
@@ -153,7 +154,7 @@ AlexNet was one of the first deep convolutional neural networks to achieve break
 <p align="center">Fig. 9: Model Architecture of AlexNet.</p>
 The model was trained for 20 epochs using the Adam optimizer with a learning rate of 0.001. The sparse categorical crossentropy loss was used, suited for multi-class classification. As depicted in Fig. 10, the model showed a sharp rise in accuracy during the initial epochs and gradually converged around 84% by the end of training.
 
-
+![image](https://raw.githubusercontent.com/MeenalMSharma/Pneumonia-Detection-Model/main/test_files/resnet.jpeg)
 <p align="center">Fig. 10: Accuracy for AlexNet.</p><br>
 
 ### DenseNet

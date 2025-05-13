@@ -26,8 +26,10 @@ def main():
         try:
             # Open and preprocess the image
             image = Image.open(uploaded_file).convert("RGB")
-            image = image.resize((150, 150))  # Resize to match model input size (150x150)
-            img_array = np.array(image).astype(np.float32) / 255.0  # Normalize the image
+            image = image.resize((150, 150))  # Resize to match model input size
+            img_array = np.array(image).astype(np.float32) / 255.0  # Normalize
+            input_tensor = np.expand_dims(img_array, axis=0)  # Shape: (1, 150, 150, 3)
+
 
             st.image(image, caption="Uploaded MRI", use_container_width=True)
             st.write(f"Image shape after resize: {img_array.shape}")  # Debug info

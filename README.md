@@ -1,43 +1,64 @@
 # Project Mentor:<br>
+Ms. Gaytri Gupta<br>
+# Project Is Created By:<br>
 Anant Pratap Singh<br>
 Meenal sharma<br>
-# Tumour Detection & Pneumonia Detection 
-## [Website Link](https://pneumonia-detection-model-jx2cctmt4fwn7ohu8sxbda.streamlit.app/)
+# PreCare Disease(Pneumonia and Brain Tumor) Detection Model<br>
+## [Website Link](https://pneumonia-detection-model-65gvcfbcra9cdglppibsxu.streamlit.app/)
 ## **Summary**
 ### Breaking Down the Problem:-
-The Problem Statement required us to create a model for detection of Brain Tumour. Brain Tumour is usually detected by a Doctor by observing MRI Scan of the brain,after which several sophisticated medical tests such as biopsy are to confirm the tumour [1]. So we decided to use the MRI scan as input data for our model to predict whether the patient has a brain tumour or not, futhermore, we decided to classify the tumour if we get the data.
+The goal was to develop two intelligent systems:
+
+One that detects pneumonia from chest X-ray images.
+
+Another that classifies brain tumors (e.g., Meningioma, Glioma, Pituitary, or Normal) from MRI scans.
+We began by understanding the nature of both diseases, the image modalities involved (X-rays vs. MRIs), and the output required (binary vs. multi-class classification).<br>
 ### Finding Dataset:-
-We searched on Google for a suitable dataset and found a few datasets containing MRI scans of the brain labeled with various types of tumour. First one we found contained 1200 images in total and after scouring around the internet a little bit we found a dataset containing around 7000 images, belonging to 4 different classes which are No Tumour, Meningioma, Glioma and Pituitary, out of which 5700 were for training and 1300 for testing [2].
+We sourced open-access, labeled datasets:
+
+Pneumonia: Chest X-ray dataset from Kaggle, containing ‘NORMAL’ and ‘PNEUMONIA’ classes.
+
+Brain Tumor: MRI dataset from Kaggle with labeled images for different tumor types and healthy scans.<br>
+We developed two deep learning-based diagnostic models:
+
+The Pneumonia Detection Model was trained on a dataset of approximately 450 chest X-ray images, evenly distributed between pneumonia and normal cases. A Convolutional Neural Network (CNN) was used for binary classification.
+
+The Brain Tumor Detection Model was trained using a dataset of around 750 MRI images, categorized into four classes: Meningioma, Glioma, Pituitary, and Normal. A CNN architecture was employed for multi-class classification.<br>
 ### Selecting Appropriate tools and Preprocessing Data:-
-After we found the data we uploaded it to Google Drive and used it from there by mounting the drive onto a Colab notebook. We used Google Colaboratory since it allows us to use a GPU which makes training faster and allows us to work collectively on the model. We used Pillow module for data preprocessing and then used the Tensorflow module to make our model. Our Data was organized as images put into folders depending upon the class of tumour they belonged to. We made csv files containing information about the image name, image tumour name, and the label encoding of the tumour for both of the training and testing datasets using the Pandas module. We then used the csv files to load the images into RAM and then preprocessed these images by converting them into RGB and into (224.224) shape.
+We used:
+
+Python as the programming language.
+
+TensorFlow/Keras for building and training models.
+
+NumPy, PIL, and OpenCV for image preprocessing (resizing, normalization).
+
+Streamlit for deploying the models as interactive web apps.
+
+Images were resized to match the input shape expected by models, and pixel values were scaled (0–1). Labels were also one-hot encoded for classification.<br>
 ### Learning About Machine Learning, Deep Learning and Transfer Learning:-
-We then learned about basic Machine Learning techniques in scikit-learn [3] and slowly moved to learning about Deep Learning and CNNs in Tensorflow [4]. We also came across Transfer Learning Technique which is very popular in Image Classification problems and learning about it through some articles [5] [6].
+We explored:
+
+Machine Learning (ML) for traditional classification logic.
+
+Deep Learning (DL), especially Convolutional Neural Networks (CNNs), for image-based predictions.
+
+Transfer Learning using pre-trained models like ResNet, DenseNet, and AlexNet, which sped up training and improved accuracy due to their robust feature extraction.<br>
 ### Making the Model:-
-So now, equipped with knowledge of Machine Learning, Deep Learning and Transfer Learning, We set out to write our model,We used pretrained model to extract features from the images and then added hidden layers for classification. We tried out several different pretrained models for the feature extraction layer such as ResNet50, InceptionV3 , EfficientNetB2 etc and compared their results to select the best for our model. MobileNetV2 turned out to give the best results and gave best results out of all of them.
+For Pneumonia, a CNN and a few pre-trained models (ResNet, etc.) were trained and evaluated.
+
+For Brain Tumor, a CNN model was built and trained from scratch or using transfer learning depending on data volume.
+
+Models were saved using .keras format after training to preserve architecture and weights for deployment.<br>
 
 ### Hosting our Model:-
-We decided to make a website for showcasing our model. We looked through different options such as flask, Django and some Javascript frameworks but ended up using Streamlit module because it is very easy to use and beginner friendly, moreover it makes deploying the website super easy.
+We used:
 
-### Additional Models:-
-Since we still had time left, we decided to use the same architecture to tackle similar problems such as Covid Detection and Pneumonia Detection using X-Ray scans of chest etc.
-## **1.Introduction:**
-The given problem statement has been divided into four subparts:
+Streamlit to build a user-friendly interface for image upload and model inference.
 
-Find a Suitable Dataset for training the Model
-Preprocess the data for training.
-Make and train the Model.
-Make a Website for the Model.
-## **2.Dataset Characteristics:**
-To create a model to predict brain tumour, we would need some form of data which could be used to identify the tumour. In the medical field, MRI(Magnetic Resonance Imaging) Report is what the doctors use to identify brain tumour, So we decided to look for an Image Dataset which contained labeled images of MRI Scans of the Brain. We found a Dataset on Kaggle,it had 5700 train images and 1300 test images,almost evenly distributed across the following types:
-i) No Tumor
-ii) Pituitary
-iii) Glioma
-iv) Meningioma
-The images were all mri images which are grayscale.The size of the images was (512X512).
+Models were uploaded with the app and processed dynamically upon image submission.
 
-### 2.1 Data Preprocessing
-We uploaded the data into a google drive,then accessed the data in google collab,we created a csv file for easier access to the data and for label encoding,then using the csv file we accessed  the images and resized them into the proper image shape of (224,224,3).We use this shape as it is the best suited image shape we can use for the pretrained cnn models we would use for our model.
-
+The app was deployed on Streamlit Cloud, generating a public URL, which was shared in the GitHub README.md for open access.<br>
 ## **Model**
 ### Inception  V3
  

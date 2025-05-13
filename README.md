@@ -59,7 +59,7 @@ Streamlit to build a user-friendly interface for image upload and model inferenc
 Models were uploaded with the app and processed dynamically upon image submission.
 
 The app was deployed on Streamlit Cloud, generating a public URL, which was shared in the GitHub README.md for open access.<br>
-## **Model**
+## **1. Backbone Feature Extractors used in Brain Tumor Detection Model**
 ### Inception  V3
  
 The Inception V3 is a deep learning model for image classification that is built on convolutional neural networks. The Inception V3 is an improved version of the Inception V1 basic model, which was presented as GoogleNet in 2014 . Inception V3's model architecture can be seen in Figure 1.
@@ -132,7 +132,34 @@ The model is trained on 30 epochs with adam optimizer at a learning rate of 0.00
 <p align="center">Fig 13: Accuracy for MobileNet V2 during first 20 epochs.</p>
 
 ![image](https://user-images.githubusercontent.com/108052351/184414991-1acd8884-6ff9-4dde-bf10-74aeaa573516.png)
-<p align="center">Fig 14:Accuracy for MobileNet V2 during last 20 epochs.</p>
+<p align="center">Fig 14:Accuracy for MobileNet V2 during last 20 epochs.</p><br>
+
+## **1. Backbone Feature Extractors used in Pneumonia Detection Model**
+### ResNet (Residual Network)
+
+ResNet, short for Residual Network, introduces the concept of skip connections (also known as identity shortcuts) that jump over some layers. This allows the model to train much deeper neural networks without the vanishing gradient problem. ResNet effectively enables the flow of gradients directly through these skip connections, which helps in learning deeper representations.
+
+
+<p align="center">Fig. 7: Model Architecture of ResNet.</p>
+The model was trained for 20 epochs using the Adam optimizer with a learning rate of 0.001. The sparse categorical crossentropy loss function was used due to the multi-class classification nature of the brain tumor detection task. As shown in Fig. 8, the model shows a consistent increase in accuracy, stabilizing around 86% after 20 epochs.
+
+
+<p align="center">Fig. 8: Accuracy for ResNet.</p><br>
+
+### AlexNet
+
+AlexNet was one of the first deep convolutional neural networks to achieve breakthrough performance in image classification. It introduced the use of ReLU activation, dropout for regularization, and data augmentation to combat overfitting. AlexNet consists of five convolutional layers, followed by three fully connected layers, and uses max pooling for downsampling.
+
+
+<p align="center">Fig. 9: Model Architecture of AlexNet.</p>
+The model was trained for 20 epochs using the Adam optimizer with a learning rate of 0.001. The sparse categorical crossentropy loss was used, suited for multi-class classification. As depicted in Fig. 10, the model showed a sharp rise in accuracy during the initial epochs and gradually converged around 84% by the end of training.
+
+
+<p align="center">Fig. 10: Accuracy for AlexNet.</p><br>
+
+### DenseNet
+
+SAME AS BRAIN TUMOR!
 
 ## The Website
 ### Streamlit

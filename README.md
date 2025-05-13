@@ -154,30 +154,34 @@ AlexNet was one of the first deep convolutional neural networks to achieve break
 <p align="center">Fig. 9: Model Architecture of AlexNet.</p>
 The model was trained for 20 epochs using the Adam optimizer with a learning rate of 0.001. The sparse categorical crossentropy loss was used, suited for multi-class classification. As depicted in Fig. 10, the model showed a sharp rise in accuracy during the initial epochs and gradually converged around 84% by the end of training.
 
-![image](https://raw.githubusercontent.com/MeenalMSharma/Pneumonia-Detection-Model/main/test_files/resnet.jpeg)
+![image](https://raw.githubusercontent.com/MeenalMSharma/Pneumonia-Detection-Model/main/test_files/alexnet.jpeg)
 <p align="center">Fig. 10: Accuracy for AlexNet.</p><br>
 
 ### DenseNet
 
 SAME AS BRAIN TUMOR!
 
-## The Website
-### Streamlit
-We made and deployed the websites using the Streamlit module, it is incredibly easy to use and made our work very easy while making the website [7]. We made a homepage, About Data Page,About us page,Contact Us page and Prediction pages
-
-### Additional Models
-Since we were done early, We used the same architecture model and trained it on some other datasets,which are Covid 19 Chest X-Ray, Pneumonia Chest X-Ray , Blood Cells.
-
-
-
 ## References:
-1)	https://www.cancer.net/cancer-types/brain-tumor/diagnosis
-2)	https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset
-3)	https://youtu.be/0B5eIE_1vpU
-4)	https://youtu.be/tPYj3fFJGjk
-5)	https://towardsdatascience.com/transfer-learning-for-image-classification-using-tensorflow-71c359b56673
-6)	https://analyticsindiamag.com/transfer-learning-for-multi-class-image-classification-using-deep-convolutional-neural-network/
-7) https://warlord-k-iitisoc-22-ai-ml-21-tumor-detection-appapp-zhwh17.streamlitapp.com/
-8) https://www.kaggle.com/datasets/pranavraikokte/covid19-image-dataset
-9) https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia
-10) https://www.kaggle.com/datasets/paultimothymooney/blood-cells
+Chest X-Ray Images (Pneumonia) – Kaggle Dataset
+🔗 https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia
+
+Deep Learning for Pneumonia Detection: A Review – IEEE Access
+🔗 https://ieeexplore.ieee.org/document/9090144
+
+Detecting Pneumonia from Chest X-rays using CNN – Medium Article
+🔗 https://medium.com/@dipakkrishna321/pneumonia-detection-from-chest-x-rays-using-cnn-6f5e1ba92099
+
+NIH Chest X-ray Dataset – National Institutes of Health
+🔗 https://www.kaggle.com/datasets/nih-chest-xrays/data
+
+Brain MRI Images for Brain Tumor Detection – Kaggle Dataset
+🔗 https://www.kaggle.com/datasets/navoneel/brain-mri-images-for-brain-tumor-detection
+
+Brain Tumor Classification Using CNN – ResearchGate Paper
+🔗 https://www.researchgate.net/publication/348778150_Brain_Tumor_Classification_using_CNN
+
+Brain Tumor Detection using Deep Learning – IEEE Xplore
+🔗 https://ieeexplore.ieee.org/document/8968784
+
+Efficient Deep Learning Model for Brain Tumor Classification – Springer
+🔗 https://link.springer.com/article/10.1007/s00500-019-04370-2

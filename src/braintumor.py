@@ -22,16 +22,18 @@ def main():
 
     if uploaded_file is not None:
         try:
+            # Open and preprocess the image
             image = Image.open(uploaded_file).convert("RGB")
-            image = image.resize((256, 256))  # Or use the correct size your model expects
-            img_array = np.array(image).astype(np.float32) / 255.0
+            image = image.resize((256, 256))  # Resize to match model input size (check model's expected input size)
+            img_array = np.array(image).astype(np.float32) / 255.0  # Normalize the image
 
             st.image(image, caption="Uploaded MRI", use_container_width=True)
             st.write(f"Image shape after resize: {img_array.shape}")  # Debug info
 
-            if img_array.shape == (256, 256, 3):
+            if img_array.shape == (256, 256, 3):  # Ensure image shape matches expected (256x256x3)
                 if st.button("Predict"):
                     if model is not None:
+                        # Add batch dimension
                         input_tensor = np.expand_dims(img_array, axis=0)  # Shape: (1, 256, 256, 3)
                         prediction = predict(model, input_tensor)
                         st.success(f"Prediction: **{prediction}**")
@@ -57,7 +59,8 @@ def predict(model, input_tensor):
     try:
         output = model.predict(input_tensor)
         class_names = ["Meningioma", "Glioma", "Pituitary", "Normal"]
-        return class_names[np.argmax(output)]
+        predicted_class = class_names[np.argmax(output)]  # Get the class with the highest probability
+        return predicted_class
     except Exception as e:
         st.error(f"Prediction error: {str(e)}")
         return None

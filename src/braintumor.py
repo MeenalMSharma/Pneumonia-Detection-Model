@@ -26,20 +26,17 @@ def main():
         try:
             # Open and preprocess the image
             image = Image.open(uploaded_file).convert("RGB")
-            image = image.resize((80, 80))  # Resize to match model input size (80x80)
+            image = image.resize((150, 150))  # Resize to match model input size (150x150)
             img_array = np.array(image).astype(np.float32) / 255.0  # Normalize the image
 
             st.image(image, caption="Uploaded MRI", use_container_width=True)
             st.write(f"Image shape after resize: {img_array.shape}")  # Debug info
 
-            # Check if the model expects a flattened input
-            if len(img_array.shape) == 3:
-                img_array = img_array.flatten()  # Flatten the image if the model expects a 1D input
+            # Check if the image shape is correct
+            if img_array.shape == (150, 150, 3):
+                # Add batch dimension
+                input_tensor = np.expand_dims(img_array, axis=0)  # Shape: (1, 150, 150, 3)
 
-            # Add batch dimension
-            input_tensor = np.expand_dims(img_array, axis=0)  # Shape: (1, 6400) or whatever model expects
-
-            if input_tensor.shape == (1, 6400):  # Ensure image shape matches expected
                 if st.button("Predict"):
                     if model is not None:
                         prediction = predict(model, input_tensor)
@@ -47,7 +44,7 @@ def main():
                     else:
                         st.error("Model not loaded. Please upload the model file.")
             else:
-                st.error(f"Image shape is incorrect. Expected shape: {input_shape}, but got: {input_tensor.shape}")
+                st.error(f"Image shape is incorrect. Expected shape: (150, 150, 3), but got: {img_array.shape}")
         except Exception as e:
             st.error(f"Error processing image: {str(e)}")
 

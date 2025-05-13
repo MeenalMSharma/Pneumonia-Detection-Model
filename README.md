@@ -142,7 +142,7 @@ ResNet, short for Residual Network, introduces the concept of skip connections (
 
 <p align="center">Fig. 7: Model Architecture of ResNet.</p>
 The model was trained for 20 epochs using the Adam optimizer with a learning rate of 0.001. The sparse categorical crossentropy loss function was used due to the multi-class classification nature of the brain tumor detection task. As shown in Fig. 8, the model shows a consistent increase in accuracy, stabilizing around 86% after 20 epochs.
-![image](https://github.com/MeenalMSharma/Pneumonia-Detection-Model/blob/main/test_files/resnet.jpeg)
+![image](https://raw.githubusercontent.com/MeenalMSharma/Pneumonia-Detection-Model/main/test_files/resnet.jpeg)
 <p align="center">Fig. 8: Accuracy for ResNet.</p><br>
 
 ### AlexNet

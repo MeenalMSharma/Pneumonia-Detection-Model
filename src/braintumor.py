@@ -32,7 +32,7 @@ def main():
             st.image(image, caption="Uploaded MRI", use_container_width=True)
             st.write(f"Image shape after resize: {img_array.shape}")  # Debug info
 
-            # Check if the image shape is correct
+            # Ensure the image shape is correct (150, 150, 3)
             if img_array.shape == (150, 150, 3):
                 # Add batch dimension
                 input_tensor = np.expand_dims(img_array, axis=0)  # Shape: (1, 150, 150, 3)

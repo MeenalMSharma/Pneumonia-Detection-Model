@@ -24,23 +24,23 @@ def main():
         try:
             # Open and preprocess the image
             image = Image.open(uploaded_file).convert("RGB")
-            image = image.resize((256, 256))  # Resize to match model input size (check model's expected input size)
+            image = image.resize((80, 80))  # Resize to match model input size (80x80 instead of 256x256)
             img_array = np.array(image).astype(np.float32) / 255.0  # Normalize the image
 
             st.image(image, caption="Uploaded MRI", use_container_width=True)
             st.write(f"Image shape after resize: {img_array.shape}")  # Debug info
 
-            if img_array.shape == (256, 256, 3):  # Ensure image shape matches expected (256x256x3)
+            if img_array.shape == (80, 80, 3):  # Ensure image shape matches expected (80x80x3)
                 if st.button("Predict"):
                     if model is not None:
                         # Add batch dimension
-                        input_tensor = np.expand_dims(img_array, axis=0)  # Shape: (1, 256, 256, 3)
+                        input_tensor = np.expand_dims(img_array, axis=0)  # Shape: (1, 80, 80, 3)
                         prediction = predict(model, input_tensor)
                         st.success(f"Prediction: **{prediction}**")
                     else:
                         st.error("Model not loaded. Please upload the model file.")
             else:
-                st.error("Image size is incorrect. Ensure the image is resized to 256x256.")
+                st.error("Image size is incorrect. Ensure the image is resized to 80x80.")
         except Exception as e:
             st.error(f"Error processing image: {str(e)}")
 

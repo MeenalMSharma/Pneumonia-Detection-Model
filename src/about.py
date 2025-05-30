@@ -49,8 +49,8 @@ def main():
         st.markdown(
             '''
             <div style="text-align:center;">
-                <strong><a href="https://github.com/MeenalMSharma" target="_blank">Github</a></strong> |
-                <strong><a href="https://www.linkedin.com/public-profile/settings?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_self_edit_contact-info%3BLSbtrAMVSTmKFJ8zRcxzAg%3D%3D" target="_blank">LinkedIn</a></strong>
+                <strong><a href="https://github.com/Warlord-K" target="_blank">Github</a></strong> |
+                <strong><a href="https://www.linkedin.com/in/yatharth-gupta-012177228/" target="_blank">LinkedIn</a></strong>
             </div>
             ''', 
             unsafe_allow_html=True

@@ -49,7 +49,7 @@ def main():
         st.markdown(
             '''
             <div style="text-align:center;">
-                <strong><a href="https://github.com/surya1176" target="_blank">Github</a></strong> |
+                <strong><a href="https://github.com/MeenalMSharma" target="_blank">Github</a></strong> |
                 <strong><a href="https://www.linkedin.com/in/surya-karthikeya-327255228" target="_blank">LinkedIn</a></strong>
             </div>
             ''', 

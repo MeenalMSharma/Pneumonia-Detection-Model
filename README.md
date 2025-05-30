@@ -4,7 +4,7 @@ Ms. Gaytri Gupta<br>
 Anant Pratap Singh<br>
 Meenal sharma<br>
 # PreCare Disease(Pneumonia and Brain Tumor) Detection Model<br>
-## [Website Link](https://pneumonia-detection-model-65gvcfbcra9cdglppibsxu.streamlit.app/)
+## [Website Link](https://precare-dxumunzvssbv7gjyc4vfk9.streamlit.app/)
 ## **Summary**
 ### Breaking Down the Problem:-
 The goal was to develop two intelligent systems:

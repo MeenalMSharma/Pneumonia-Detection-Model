@@ -1,8 +1,9 @@
-pandas>=1.3,<2.0  
-opencv-python>=4.5  
-scikit-learn>=0.24  
-matplotlib>=3.4  
-streamlit>=1.20  
-tensorflow==2.11.0   # <-- FIXED version to avoid batch_shape error
-Pillow>=8.0  
-numpy>=1.21
+# Known compatible versions
+numpy==1.23.5
+pandas==1.5.3
+opencv-python>=4.5
+scikit-learn>=0.24
+matplotlib>=3.4
+streamlit>=1.20
+tensorflow==2.11.0
+Pillow>=8.0
